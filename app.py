@@ -5,10 +5,19 @@ import pandas as pd
 import plotly.graph_objects as go
 import numpy as np
 import math
+import gdown
 
-# Daten einlesen
-dateipfad = 'gesamter_Datensatz_nach_Land_sortiert.csv'  # Stelle sicher, dass sich die Datei im richtigen Verzeichnis befindet
-all_sorted = pd.read_csv(dateipfad, encoding='utf-8')
+
+# Verwende die ID der Datei aus der Google Drive URL
+file_id = '1-Qn9Zg4sxmAwhxsATyJNQ--EQZdqAGS8'
+url = f"https://drive.google.com/uc?id={file_id}"
+
+# Die Datei herunterladen
+gdown.download(url, 'gesamter_Datensatz_nach_Land_sortiert.csv', quiet=False)
+
+# Danach die CSV-Datei in Pandas laden
+all_sorted = pd.read_csv('gesamter_Datensatz_nach_Land_sortiert.csv', encoding='utf-8')
+
 
 # Sicherstellen, dass die Zeitraum-Spalte als Datum erkannt wird
 all_sorted['Zeitraum'] = pd.to_datetime(all_sorted['Zeitraum'])
